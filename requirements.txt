@@ -9,3 +9,5 @@ langchain-chroma
 langchain-groq
 python-dotenv
 uvicorn
+
+
