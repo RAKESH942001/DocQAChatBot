@@ -6,8 +6,8 @@ import numpy as np
 
 from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.embeddings import OllamaEmbeddings
-from langchain.vectorstores import Chroma
+from langchain_community.embeddings import OllamaEmbeddings
+from langchain_community.vectorstores import Chroma
 from langchain.retrievers.multi_query import MultiQueryRetriever
 
 from prompt import prompt
@@ -102,7 +102,7 @@ async def ask_question(question: str = Form(...), pdf: UploadFile = File(...)):
         pages = loader.load_and_split()
         text = "".join(p.page_content for p in pages)
         if not text.strip():
-            raise HTTPException(400, "⚠️ PDF has no extractable text.")
+            raise HTTPException(400, "PDF has no extractable text.")
         logging.info(f"Step2 (load & split): {time.time()-step:.2f}s")
 
         # 3. Vector DB (cached or fresh)
@@ -170,6 +170,6 @@ async def ask_question(question: str = Form(...), pdf: UploadFile = File(...)):
         raise
     except Exception:
         logging.error("Exception in /ask:", exc_info=True)
-        raise HTTPException(500, "🚨 Internal server error")
+        raise HTTPException(500, "Internal server error")
     finally:
         logging.info(f"Total time: {time.time() - total_start:.2f}s")
