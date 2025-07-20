@@ -77,4 +77,32 @@ Before you begin, ensure you have met the following requirements:
 
 7. Open your web browser and navigate to the Streamlit app URL (typically `http://localhost:8501`)
 
+## Technical Summary
 
+This project is a chatbot-style Document Q&A system where users upload PDFs and ask questions based on their content. The idea was to make it feel like chatting with a bot, similar to WhatsApp.
+
+### Tech Used
+
+- Frontend: Streamlit
+- Backend: FastAPI
+- PDF Parsing: pdfplumber
+- Embeddings: nomic-embed-text + ChromaDB
+- LLM: Groq (LLaMA 3-8B)
+- Retrieval: LangChain
+
+### Challenges Faced
+
+- Some image-based PDFs had no readable text. I added checks to detect this and show a proper message.
+- The chat UI initially re-rendered files multiple times. I used session handling to fix this.
+- LangChain failed with empty embeddings, so I added a condition to prevent those errors.
+- Faced GitHub permission issues but resolved it by updating my credentials.
+
+### Improvements
+
+With more time, I would:
+
+- Add OCR for image-based PDFs.
+- Improve the UI further using React or a custom frontend.
+- Add user login and history.
+
+This project helped me understand how to build a full AI app and manage real-world problems.
